@@ -940,7 +940,7 @@
 
                 <!-- Resume Download button -->
                 <div class="relative z-10">
-                    <a href="./Profile_260228_210701.pdf" download class="group relative inline-flex items-center gap-3 px-7 py-4 rounded-2xl overflow-hidden
+                    <button id="resume-open-btn" class="group relative inline-flex items-center gap-3 px-7 py-4 rounded-2xl overflow-hidden
                         bg-white/60 dark:bg-white/[0.04]
                         border border-white/75 dark:border-white/[0.06]
                         shadow-[0_6px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)]
@@ -948,15 +948,15 @@
                         backdrop-blur-md
                         hover:shadow-[0_10px_36px_rgba(236,91,19,0.2),inset_0_1px_0_rgba(255,255,255,1)]
                         hover:-translate-y-1 active:scale-95 transition-all duration-300
-                        text-slate-800 dark:text-white font-bold text-sm">
+                        text-slate-800 dark:text-white font-bold text-sm cursor-pointer">
                         <div
                             class="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/50 to-transparent rounded-t-2xl pointer-events-none">
                         </div>
                         <span
                             class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-all duration-300 rounded-2xl"></span>
-                        <span class="material-symbols-outlined text-primary relative z-10">download</span>
-                        <span class="relative z-10 uppercase tracking-widest text-xs">Download Resume</span>
-                    </a>
+                        <span class="material-symbols-outlined text-primary relative z-10">description</span>
+                        <span class="relative z-10 uppercase tracking-widest text-xs">View Resume</span>
+                    </button>
                 </div>
             </div>
         </footer>
@@ -1339,6 +1339,285 @@
                     mainHeader.classList.remove('scrolled');
                 }
             });
+        });
+    </script>
+
+    <!-- ══ RESUME OVERLAY ══ -->
+    <div id="resume-overlay" style="
+        display:none;
+        position:fixed;inset:0;z-index:9999;
+        background:rgba(0,0,0,0.55);
+        backdrop-filter:blur(6px);
+        -webkit-backdrop-filter:blur(6px);
+        overflow-y:auto;
+        animation:fadeIn 0.25s ease;
+    ">
+        <div style="
+          max-width:860px;
+          margin:40px auto;
+          background:#f5f3ef;
+          border-radius:16px;
+          box-shadow:0 32px 80px rgba(0,0,0,0.35);
+          padding:60px 36px 80px;
+          position:relative;
+          font-family:'DM Sans',sans-serif;
+          font-weight:300;
+          color:#1a1814;
+      ">
+            <!-- Back button (left) -->
+            <button id="resume-close-btn" style="
+            position:absolute;top:20px;left:20px;
+            background:#2d2a26;color:#f5f3ef;
+            border:none;border-radius:8px;
+            padding:8px 18px;
+            font-family:'DM Sans',sans-serif;
+            font-size:0.75rem;letter-spacing:0.12em;
+            text-transform:uppercase;cursor:pointer;
+            font-weight:500;
+            box-shadow:0 4px 16px rgba(45,42,38,0.2);
+            transition:background 0.2s,transform 0.15s;
+        " onmouseover="this.style.background='#444038'" onmouseout="this.style.background='#2d2a26'">← Back</button>
+
+            <!-- Print button (right) -->
+            <button id="resume-print-btn" style="
+            position:absolute;top:20px;right:20px;
+            background:#f5f3ef;color:#2d2a26;
+            border:1px solid #d8d4cc;border-radius:8px;
+            padding:8px 18px;
+            font-family:'DM Sans',sans-serif;
+            font-size:0.75rem;letter-spacing:0.12em;
+            text-transform:uppercase;cursor:pointer;
+            font-weight:500;
+            box-shadow:0 4px 16px rgba(45,42,38,0.06);
+            transition:border-color 0.2s,transform 0.15s;
+        " onmouseover="this.style.borderColor='#2d2a26'" onmouseout="this.style.borderColor='#d8d4cc'">⬇ Print</button>
+
+            <!-- HEADER -->
+            <div style="border-bottom:1px solid #d8d4cc;padding-bottom:40px;margin-bottom:48px;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;">
+                    <div>
+                        <h1
+                            style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-0.02em;line-height:1;">
+                            Arunaksha <span style="color:#2d2a26;">Das</span></h1>
+                        <p
+                            style="margin-top:10px;font-family:'DM Mono',monospace;font-size:0.73rem;letter-spacing:0.15em;text-transform:uppercase;color:#8a8680;">
+                            Full-Stack Developer &nbsp;·&nbsp; BBA Student &nbsp;·&nbsp; Cybersecurity</p>
+                        <div
+                            style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:#8a8680;border:1px solid #d8d4cc;padding:5px 12px;border-radius:100px;">
+                            📍 Agartala, Tripura, India</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;font-size:0.82rem;">
+                        <a href="tel:+919863382316" style="color:#1a1814;text-decoration:none;">📞 +91 98633 82316</a>
+                        <a href="mailto:arunaksha73@gmail.com" style="color:#1a1814;text-decoration:none;">✉
+                            arunaksha73@gmail.com</a>
+                        <a href="https://arunaksha-port.arunaksha73.workers.dev" target="_blank"
+                            style="color:#1a1814;text-decoration:none;">🌐 Portfolio</a>
+                        <a href="https://linkedin.com/in/arunaksha-das-aa44b03a6" target="_blank"
+                            style="color:#1a1814;text-decoration:none;">💼 LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUMMARY -->
+            <div style="margin-bottom:40px;">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:#2d2a26;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+                    Summary <span style="flex:1;height:1px;background:#d8d4cc;"></span></div>
+                <p style="font-size:0.93rem;line-height:1.75;color:#4a4740;">Passionate Business Administration student
+                    and aspiring Full-Stack Developer with strong interest in Cybersecurity. Skilled in HTML, CSS, Java,
+                    and Python. Experienced in building secure, responsive, and user-friendly web applications.
+                    Committed to combining technical expertise with strategic business thinking to deliver impactful
+                    digital solutions.</p>
+            </div>
+
+            <!-- SKILLS -->
+            <div style="margin-bottom:40px;">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:#2d2a26;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+                    Skills <span style="flex:1;height:1px;background:#d8d4cc;"></span></div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">HTML5</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">CSS3</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Java</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Python</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Full-Stack
+                        Development</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Responsive
+                        Web Design</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Git
+                        / GitHub</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Cybersecurity
+                        Awareness</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Risk
+                        Assessment</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Digital
+                        Marketing</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Market
+                        Research</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Data
+                        Analysis</span>
+                    <span
+                        style="background:#ece9e4;border:1px solid #d8d4cc;font-family:'DM Mono',monospace;font-size:0.72rem;padding:6px 14px;border-radius:4px;">Business
+                        Strategy</span>
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div style="margin-bottom:40px;">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:#2d2a26;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+                    Projects <span style="flex:1;height:1px;background:#d8d4cc;"></span></div>
+                <div
+                    style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;margin-bottom:12px;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
+                        Personal Portfolio Website</div>
+                    <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Designed and developed a modern
+                        responsive portfolio, deployed using Cloudflare Workers. Visit: <a
+                            href="https://arunaksha-port.arunaksha73.workers.dev" target="_blank"
+                            style="color:#5a6e8c;text-decoration:none;">arunaksha-port.arunaksha73.workers.dev</a></p>
+                </div>
+                <div style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
+                        Interactive Holi Web Project</div>
+                    <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Created an animated landing page with
+                        gradient effects, a countdown timer, and a fully responsive design — celebrating the festival of
+                        colors through dynamic web design.</p>
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div style="margin-bottom:40px;">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:#2d2a26;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+                    Education <span style="flex:1;height:1px;background:#d8d4cc;"></span></div>
+                <div
+                    style="padding:16px 0;border-bottom:1px solid #d8d4cc;display:grid;grid-template-columns:1fr auto;gap:8px;">
+                    <div>
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:4px;">
+                            Bachelor of Business Administration (BBA)</div>
+                        <div style="font-size:0.82rem;color:#8a8680;">ICFAI University Tripura</div>
+                    </div>
+                    <div
+                        style="font-family:'DM Mono',monospace;font-size:0.7rem;color:#2d2a26;letter-spacing:0.08em;white-space:nowrap;margin-top:3px;">
+                        Expected 2028</div>
+                </div>
+                <div style="padding:16px 0;display:grid;grid-template-columns:1fr auto;gap:8px;">
+                    <div>
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:4px;">
+                            Higher Secondary — Class 12</div>
+                        <div style="font-size:0.82rem;color:#8a8680;">Kamalpur Govt English Medium School</div>
+                    </div>
+                    <div
+                        style="font-family:'DM Mono',monospace;font-size:0.7rem;color:#2d2a26;letter-spacing:0.08em;white-space:nowrap;margin-top:3px;">
+                        Completed 2025</div>
+                </div>
+            </div>
+
+            <!-- LANGUAGES -->
+            <div style="margin-bottom:40px;">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:#2d2a26;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+                    Languages <span style="flex:1;height:1px;background:#d8d4cc;"></span></div>
+                <div style="display:flex;flex-wrap:wrap;gap:24px;">
+                    <div>
+                        <div style="font-size:0.88rem;font-weight:500;">Bengali</div>
+                        <div
+                            style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:#8a8680;text-transform:uppercase;">
+                            Native</div>
+                        <div style="display:flex;gap:4px;margin-top:5px;"><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.88rem;font-weight:500;">Hindi</div>
+                        <div
+                            style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:#8a8680;text-transform:uppercase;">
+                            Advanced</div>
+                        <div style="display:flex;gap:4px;margin-top:5px;"><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#d8d4cc;"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.88rem;font-weight:500;">English</div>
+                        <div
+                            style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:#8a8680;text-transform:uppercase;">
+                            Intermediate</div>
+                        <div style="display:flex;gap:4px;margin-top:5px;"><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#2d2a26;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#d8d4cc;"></span><span
+                                style="width:7px;height:7px;border-radius:50%;background:#d8d4cc;"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div
+                style="margin-top:48px;padding-top:20px;border-top:1px solid #d8d4cc;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'DM Mono',monospace;font-size:0.63rem;color:#8a8680;letter-spacing:0.08em;">
+                <span>Arunaksha Das &nbsp;·&nbsp; Resume</span>
+                <span>arunaksha73@gmail.com</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openResume() {
+            const overlay = document.getElementById('resume-overlay');
+            if (overlay) overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            // Load Google Fonts for resume if not already present
+            if (!document.getElementById('resume-fonts')) {
+                const link = document.createElement('link');
+                link.id = 'resume-fonts';
+                link.rel = 'stylesheet';
+                link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap';
+                document.head.appendChild(link);
+            }
+        }
+        function closeResume() {
+            const overlay = document.getElementById('resume-overlay');
+            if (overlay) overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Attach event listeners directly (safe since this script is at the bottom of the body)
+        const resumeOpenBtn = document.getElementById('resume-open-btn');
+        if (resumeOpenBtn) resumeOpenBtn.addEventListener('click', openResume);
+
+        const resumeCloseBtn = document.getElementById('resume-close-btn');
+        if (resumeCloseBtn) resumeCloseBtn.addEventListener('click', closeResume);
+
+        const resumePrintBtn = document.getElementById('resume-print-btn');
+        if (resumePrintBtn) resumePrintBtn.addEventListener('click', function () { window.print(); });
+
+        // Close on backdrop click
+        document.getElementById('resume-overlay').addEventListener('click', function (e) {
+            if (e.target === this) closeResume();
+        });
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeResume();
         });
     </script>
 </body>
