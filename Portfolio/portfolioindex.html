@@ -1603,17 +1603,15 @@
             document.body.style.overflow = '';
         }
 
-        // Attach event listeners when DOM loads to avoid Content Security Policy (CSP) conflicts
-        document.addEventListener('DOMContentLoaded', function () {
-            const openBtn = document.getElementById('resume-open-btn');
-            if (openBtn) openBtn.addEventListener('click', openResume);
+        // Attach event listeners directly (safe since this script is at the bottom of the body)
+        const openBtn = document.getElementById('resume-open-btn');
+        if (openBtn) openBtn.addEventListener('click', openResume);
 
-            const closeBtn = document.getElementById('resume-close-btn');
-            if (closeBtn) closeBtn.addEventListener('click', closeResume);
+        const closeBtn = document.getElementById('resume-close-btn');
+        if (closeBtn) closeBtn.addEventListener('click', closeResume);
 
-            const printBtn = document.getElementById('resume-print-btn');
-            if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
-        });
+        const printBtn = document.getElementById('resume-print-btn');
+        if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
         // Close on backdrop click
         document.getElementById('resume-overlay').addEventListener('click', function (e) {
