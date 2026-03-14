@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Blog | Arunaksha Das</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .grid-paper {
+            background-image: radial-gradient(circle, #00000010 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .dark .grid-paper {
+            background-image: radial-gradient(circle, #ffffff10 1px, transparent 1px);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen grid-paper">
+    <div class="layout-container flex h-full grow flex-col max-w-[800px] mx-auto px-4 sm:px-10 py-12">
+
+        <!-- Header / Back to Portfolio -->
+        <header
+            class="flex items-center justify-between border-b border-dashed border-slate-300 dark:border-slate-700 pb-6 mb-12">
+            <a href="portfolioindex.html"
+                class="flex items-center gap-2 text-primary font-bold hover:brightness-110 transition-all">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back to Portfolio
+            </a>
+        </header>
+
+        <!-- Blog Content -->
+        <article
+            class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 relative">
+            <div class="text-sm font-bold text-primary tracking-widest uppercase mb-4">Latest Post</div>
+            <h1 class="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-8">My Journey & Philosophy</h1>
+
+            <div
+                class="prose dark:prose-invert max-w-none text-lg leading-relaxed text-slate-700 dark:text-slate-300 space-y-6">
+                <p>
+                    As a Full-Stack Developer based in Tripura, I focus on creating secure, scalable, and
+                    performance-driven web applications. My portfolio reflects hands-on experience in modern web
+                    development, deployment strategies, and cybersecurity principles.
+                </p>
+                <p>
+                    Working from Northeast India has strengthened my problem-solving approach, allowing me to
+                    independently manage development, deployment, debugging, and optimization processes using GitHub and
+                    modern hosting platforms.
+                </p>
+                <div class="p-6 bg-primary/10 rounded-xl border-l-4 border-primary my-8 italic">
+                    "Each project is built with a structured, business-oriented mindset aligned with modern digital
+                    standards."
+                </div>
+                <p>
+                    My expertise includes responsive website development, portfolio design, SEO optimization, and
+                    implementing secure coding practices.
+                </p>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                <div
+                    class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    AD
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-slate-100">Arunaksha Das</h4>
+                    <p class="text-sm text-slate-500">Full-Stack Developer</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-xs text-slate-400 font-medium uppercase tracking-[0.2em]">
+            © 2026 Arunaksha's Portfolio • Built with passion
+        </footer>
+    </div>
+</body>
+
+</html>
