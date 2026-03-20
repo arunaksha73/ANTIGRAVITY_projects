@@ -264,8 +264,8 @@
                     Blog
                 </a>
                 <!-- Contact Glass Pill (Branded) -->
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Arunaksha73@gmail.com&su=Portfolio%20Inquiry&body=Hello%20Arunaksha,%20I%20would%20like%20to%20connect%20with%20you."
-                    target="_blank" class="glass-btn glass-btn-contact">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arunaksha73@gmail.com" target="_blank"
+                    class="glass-btn glass-btn-contact">
                     <span class="glass-btn-icon">
                         <span class="material-symbols-outlined" style="font-size:16px;">mail</span>
                     </span>
@@ -1380,8 +1380,8 @@
             transition:background 0.2s,transform 0.15s;
         " onmouseover="this.style.background='#444038'" onmouseout="this.style.background='#2d2a26'">← Back</button>
 
-            <!-- Print button (right) -->
-            <button id="resume-print-btn" style="
+            <!-- Download button (right) -->
+            <button id="resume-download-btn" style="
             position:absolute;top:20px;right:20px;
             background:#f5f3ef;color:#2d2a26;
             border:1px solid #d8d4cc;border-radius:8px;
@@ -1392,7 +1392,8 @@
             font-weight:500;
             box-shadow:0 4px 16px rgba(45,42,38,0.06);
             transition:border-color 0.2s,transform 0.15s;
-        " onmouseover="this.style.borderColor='#2d2a26'" onmouseout="this.style.borderColor='#d8d4cc'">⬇ Print</button>
+        " onmouseover="this.style.borderColor='#2d2a26'" onmouseout="this.style.borderColor='#d8d4cc'">⬇
+                Download</button>
 
             <!-- HEADER -->
             <div style="border-bottom:1px solid #d8d4cc;padding-bottom:40px;margin-bottom:48px;">
@@ -1486,9 +1487,7 @@
                     <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
                         Personal Portfolio Website</div>
                     <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Designed and developed a modern
-                        responsive portfolio, deployed using Cloudflare Workers. Visit: <a
-                            href="https://arunaksha-port.arunaksha73.workers.dev" target="_blank"
-                            style="color:#5a6e8c;text-decoration:none;">arunaksha-port.arunaksha73.workers.dev</a></p>
+                        responsive portfolio, deployed using Cloudflare Workers.</p>
                 </div>
                 <div
                     style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;margin-bottom:12px;">
@@ -1498,17 +1497,29 @@
                         gradient effects, a countdown timer, and a fully responsive design — celebrating the festival of
                         colors through dynamic web design.</p>
                 </div>
-                <div style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;margin-bottom:12px;">
+                <div
+                    style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;margin-bottom:12px;">
                     <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
                         Aura Task Management</div>
                     <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Developed Aura, a task management
                         website designed to help users organize daily activities, manage tasks efficiently, and improve
                         productivity with a simple and user-friendly interface.</p>
                 </div>
-                <div style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;">
+                <div
+                    style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;margin-bottom:12px;">
                     <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
                         Atmos Weather</div>
-                    <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Lightweight weather client built with vanilla JS, featuring real-time API data, responsive glass UI, and location-aware forecasting. Optimized for performance and clean UX.</p>
+                    <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">Lightweight weather client built with
+                        vanilla JS, featuring real-time API data, responsive glass UI, and location-aware forecasting.
+                        Optimized for performance and clean UX.</p>
+                </div>
+                <div style="background:#fff;border:1px solid #d8d4cc;border-radius:8px;padding:20px 24px;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;">
+                        TechBoard — Digital Teaching Board</div>
+                    <p style="font-size:0.85rem;line-height:1.65;color:#6a6660;">I built TechBoard to make teaching feel
+                        a bit more natural online. It works like a simple classroom board where you can draw, write, and
+                        explain things easily — just without the physical board. The focus was to keep everything clean,
+                        smooth, and easy to use, so anyone can jump in and start teaching without confusion.</p>
                 </div>
             </div>
             <!-- EDUCATION -->
@@ -1622,8 +1633,36 @@
         const closeBtn = document.getElementById('resume-close-btn');
         if (closeBtn) closeBtn.addEventListener('click', closeResume);
 
-        const printBtn = document.getElementById('resume-print-btn');
-        if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
+        const downloadBtn = document.getElementById('resume-download-btn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function () {
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = '⏳ GENERATING...';
+                downloadBtn.style.pointerEvents = 'none';
+
+                const element = document.querySelector('#resume-overlay > div');
+
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: 'Arunaksha_Das_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        windowWidth: 860,
+                        ignoreElements: (node) => {
+                            return node.id === 'resume-close-btn' || node.id === 'resume-download-btn';
+                        }
+                    },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opt).from(element).save().then(() => {
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.style.pointerEvents = 'auto';
+                });
+            });
+        }
 
         // Close on backdrop click
         document.getElementById('resume-overlay').addEventListener('click', function (e) {
@@ -1634,6 +1673,7 @@
             if (e.key === 'Escape') closeResume();
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 
 </html>

@@ -167,27 +167,17 @@
         /* ── SECTION TITLES ── */
         section {
             margin-bottom: 44px;
-            animation: fadeUp 0.7s ease both;
         }
 
-        section:nth-child(2) {
-            animation-delay: 0.1s;
+        .reveal-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
 
-        section:nth-child(3) {
-            animation-delay: 0.18s;
-        }
-
-        section:nth-child(4) {
-            animation-delay: 0.26s;
-        }
-
-        section:nth-child(5) {
-            animation-delay: 0.34s;
-        }
-
-        section:nth-child(6) {
-            animation-delay: 0.42s;
+        .reveal-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-label {
@@ -423,17 +413,6 @@
         }
 
         /* ── ANIMATION ── */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
         /* ── PRINT ── */
         @media print {
@@ -566,11 +545,7 @@
 
             <div class="project-card">
                 <div class="project-title">Personal Portfolio Website</div>
-                <p class="project-desc">Designed and developed a modern responsive portfolio, deployed using Cloudflare
-                    Workers. Visit: <a href="https://arunaksha-port.arunaksha73.workers.dev" target="_blank"
-                        rel="noopener"
-                        style="color:var(--accent2);text-decoration:none;">arunaksha-port.arunaksha73.workers.dev</a>
-                </p>
+                <p class="project-desc">Designed and developed a modern responsive portfolio, deployed using Cloudflare Workers.</p>
             </div>
 
             <div class="project-card">
@@ -587,6 +562,11 @@
             <div class="project-card">
                 <div class="project-title">Atmos Weather</div>
                 <p class="project-desc">Lightweight weather client built with vanilla JS, featuring real-time API data, responsive glass UI, and location-aware forecasting. Optimized for performance and clean UX.</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">TechBoard — Digital Teaching Board</div>
+                <p class="project-desc">I built TechBoard to make teaching feel a bit more natural online. It works like a simple classroom board where you can draw, write, and explain things easily — just without the physical board. The focus was to keep everything clean, smooth, and easy to use, so anyone can jump in and start teaching without confusion.</p>
             </div>
         </section>
 
@@ -658,9 +638,64 @@
 
     </div>
 
-    <button class="print-btn" onclick="window.print()">⬇ Print / Save PDF</button>
+    <button class="print-btn" onclick="downloadPDF()">⬇ Download Resume </button>
     <a class="back-btn" href="portfolioindex.html">← Back to Portfolio</a>
 
+    <!-- html2pdf.js for direct download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Scroll Animation Logic
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.12
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, header').forEach(sec => {
+            sec.classList.add('reveal-scroll');
+            observer.observe(sec);
+        });
+
+        // Direct Download Logic
+        function downloadPDF() {
+            const btn = document.querySelector('.print-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ GENERATING...';
+            btn.style.pointerEvents = 'none';
+
+            // Ensure all sections are visible for the PDF
+            document.querySelectorAll('.reveal-scroll').forEach(sec => {
+                sec.classList.add('visible');
+            });
+
+            const element = document.querySelector('.wrapper');
+            const body = document.body;
+            body.style.background = '#fff';
+
+            const opt = {
+                margin:       [10, 10, 10, 10],
+                filename:     'Arunaksha_Das_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, windowWidth: 860 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+                body.style.background = '';
+            });
+        }
+    </script>
 </body>
 
 </html>
